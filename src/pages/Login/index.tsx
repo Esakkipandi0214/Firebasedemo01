@@ -1,38 +1,33 @@
 import { useState } from "react";
-import {auth} from '@/firebase'
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '@/firebase'; // Adjust this import based on your Firebase config path
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-   const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    try{
-
-      const userCredential = await createUserWithEmailAndPassword(auth,email,password);
-      const  user = userCredential.user;
-      const token = await user.getIdToken();
-      console.log("Token:", token);
 
     if (!email || !password) {
       setError("Please fill in all fields.");
       return;
     }
 
-    }catch(e){
-      console.error(e);
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const token = await user.getIdToken();
+      console.log("Logged in. Token:", token);
+      console.log("Login successfull..!")
+    } catch (error) {
+      console.error(error);
+      console.log('LOgin Failed..!')
+      setError("Failed to log in. Please check your credentials.");
     }
-    
-
-    // Handle login logic here
-    console.log("Login attempt with:", { email, password });
   };
-
-  console.log("Email:",email);
-  console.log("Pass:",password);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
