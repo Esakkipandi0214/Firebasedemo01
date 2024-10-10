@@ -82,7 +82,7 @@ export default function ProductTable() {
         <tbody>
           {FoodItems.map((product) => (
             <tr key={product.id}>
-              <td className="px-4 py-2 border border-gray-300 font-medium"><a href={`/FoodSingle/${product.id}`}>{product.name}</a> </td>
+              <td className="px-4 py-2 border border-gray-300 font-medium"><a href={`/FoodSingle/${product.name}/${product.id}`}>{product.name}</a> </td>
               <td className="px-4 py-2 text-right border border-gray-300">${product.Price}</td>
               <td className="px-4 py-2 text-right border border-gray-300">{product.Quantity}</td>
               <td className="px-4 py-2 text-right border border-gray-300">

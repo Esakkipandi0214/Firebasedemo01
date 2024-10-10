@@ -44,7 +44,7 @@ const SingleFoodItem = () => {
     }
   }, [router.query.id]);
 
-  console.log("Get Food Id", query.id, "Get data:", foodItem);
+  console.log("Get Food Id", query.id,query.slug, "Get data:", foodItem);
 
   return (
     <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-900 via-gray-700 to-black">
