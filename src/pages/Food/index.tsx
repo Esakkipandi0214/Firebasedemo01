@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import {db} from '@/firebase'
 import { collection} from "firebase/firestore"
 import { addDoc,getDocs } from "firebase/firestore"
+import Header from '@/Components/DemoSubComponents/DemoHeader'
 
 export default function CreateFoodDetails() {
   const [name, setName] = useState("")
@@ -33,8 +34,8 @@ export default function CreateFoodDetails() {
       return
     }
     try{
-        const userDocRef = collection(db,"FoodOrder");
-        const foodId =  await addDoc(userDocRef,{name,Price,Quantity})
+        // const userDocRef = collection(db,"FoodOrder");
+        const foodId =  await addDoc(collection(db,"FoodOrder"),{name,Price,Quantity})
         console.log("FoodId:",foodId.id)
         
     }catch(e){
@@ -48,7 +49,10 @@ export default function CreateFoodDetails() {
     setName("")
   }
 
-  return (
+  console.log("Name:",name)
+
+  return (<>
+    <Header/>
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md bg-white p-6 shadow-md rounded-md">
         <div className="mb-6">
@@ -110,5 +114,6 @@ export default function CreateFoodDetails() {
         </form>
       </div>
     </div>
+    </>
   )
 }

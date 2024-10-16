@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { auth } from '@/firebase'; // Adjust this import based on your Firebase config path
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from 'next/router';
+import Link from "next/link";
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,10 +25,13 @@ export default function LoginPage() {
       const user = userCredential.user;
       const token = await user.getIdToken();
       console.log("Logged in. Token:", token);
+      localStorage.setItem('Mhytoken', token);
       console.log("Login successfull..!")
+      router.push("/GetFoodItems")
     } catch (error) {
       console.error(error);
       console.log('LOgin Failed..!')
+      alert("Login Failed ...!")
       setError("Failed to log in. Please check your credentials.");
     }
   };
@@ -72,6 +79,8 @@ export default function LoginPage() {
             )}
           </div>
           <div className="mt-6">
+          <p><Link href="/ " className=" hover:text-blue-500 underline">Register</Link></p>
+
             <button
               type="submit"
               className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-500"

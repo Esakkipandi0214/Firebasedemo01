@@ -1,8 +1,11 @@
 import {db} from '@/firebase'
-import { useEffect, useState } from "react"
+import { useDebugValue, useEffect, useState } from "react"
 
 import { collection, doc} from "firebase/firestore"
 import { getDocs,deleteDoc } from "firebase/firestore"
+import Header from '@/Components/DemoSubComponents/DemoHeader'
+import { useRouter } from 'next/router';
+
 
 
 interface Product {
@@ -16,6 +19,16 @@ export default function ProductTable() {
 
     const [FoodItems,setFoodeItem] = useState<Product[]>([]);
     const [Message, setmessage]=useState("")
+    const router = useRouter();
+
+    useEffect(()=>{
+      const authToken =  localStorage.getItem("Mhytoken")
+      const userauth = localStorage.getItem("MhytokenUserId")
+      if(!authToken && !userauth){
+        router.push("/")
+      }
+    },[router])
+
 
     // const products = [
     //   { name: "T-Shirt", price: 19.99, quantity: 50 },
@@ -27,8 +40,8 @@ export default function ProductTable() {
 
     const fetchData =async ()=>{
         try{
-            const userDocRef = collection(db,"FoodOrder");
-            const foodIdget =  await getDocs(userDocRef)
+            // const userDocRef = collection(db,"FoodOrder");
+            const foodIdget =  await getDocs(collection(db,"FoodOrder"))
             const fetchedData = foodIdget.docs.map((doc)=>({
                 id:doc.id,
                 ...doc.data()
@@ -66,6 +79,7 @@ export default function ProductTable() {
   
     return (
         <>
+        <Header/>
       <table className="min-w-full table-auto border-collapse border border-gray-300">
         <caption className="caption-top text-lg font-semibold py-2">
           A simple table of product inventory
