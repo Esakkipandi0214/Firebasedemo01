@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
-// import FoodModel from './FoodModel';
+import FoodModel from './FoodModel';
+
+interface CardsDetail {
+     id: number; name: string; category: string; price: number; calories: number; ingredients: string[]; 
+}
 
 const FoodDetails = () => { // Changed the component name to start with an uppercase letter
     const [searchQuery, setSearchQuery] =useState("");
+    const [isCardShow, setIsCardShow]=useState(false)
+    const [cardDetail,setCardDetail]= useState<CardsDetail | undefined>();
     const orderDetails = [ // Changed the variable name to follow camelCase convention
         {
             "id": 1,
@@ -86,6 +92,18 @@ const FoodDetails = () => { // Changed the component name to start with an upper
         }
     ];
 
+    const hanldeCardsShow = (Carditem:CardsDetail )=>{
+
+        setIsCardShow(true)
+        setCardDetail(Carditem)
+        console.log("clicked Card Item:", Carditem);
+
+    }
+
+    const handleCloseItemModel = ()=>{
+        setIsCardShow(false)
+    }
+
     console.log("Query:",searchQuery)
 
     return (
@@ -95,7 +113,7 @@ const FoodDetails = () => { // Changed the component name to start with an upper
 
             <div className=' h-full pl-10 grid grid-cols-3 gap-2 py-2 overflow-y-auto w-full'>
                 {orderDetails.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase())).map((details, index) => (
-                    <div key={index} className=' bg-yellow-500 p-5 h-[200px] w-[200px]'>
+                    <div key={index} onClick={()=>hanldeCardsShow(details)} className=' bg-yellow-500 p-5 h-[200px] w-[200px]'>
                         <h1>{details.id}</h1>
                         <p>{details.name}</p>
                         <p>{details.category}</p>
@@ -105,7 +123,7 @@ const FoodDetails = () => { // Changed the component name to start with an upper
                     </div>
                 ))}
             </div>
-            {/* <FoodModel/> */}
+            {(isCardShow && cardDetail)  && <FoodModel setHanldeCardShow={handleCloseItemModel} cardDetail={cardDetail}/>}
         </div>
     );
 };
