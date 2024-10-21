@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import FoodModel from './FoodModel';
+import {useDetailsContext} from '../../Provider/DataContext'
 
 interface CardsDetail {
      id: number; name: string; category: string; price: number; calories: number; ingredients: string[]; 
 }
 
 const FoodDetails = () => { // Changed the component name to start with an uppercase letter
+    const {FoodItemsNew} = useDetailsContext();
+    console.log("Data Context Cards:", FoodItemsNew);
     const [searchQuery, setSearchQuery] =useState("");
     const [isCardShow, setIsCardShow]=useState(false)
     const [cardDetail,setCardDetail]= useState<CardsDetail | undefined>();
