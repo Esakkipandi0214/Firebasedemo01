@@ -70,7 +70,7 @@ export default function ProductTable() {
 
   return (
     <>
-      <Header />
+      <Header FoodItems={FoodItems} />
       <table className="min-w-full table-auto border-collapse border border-gray-300">
         <caption className="caption-top text-lg font-semibold py-2">
           A simple table of product inventory
