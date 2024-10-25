@@ -54,7 +54,12 @@ const DemoHeader: React.FC<DemoHeaderProps> = () => {
     { Label: "Food", Link: "/Food" },
     { Label: "GetFoodItems", Link: "/GetFoodItems" },
     { Label: "UpdateFoodItem", Link: "/UpdateFoodItem" },
-    { Label: "Cards", Link: "/Cards" }
+    { Label: "Cards", Link: "/Cards" },
+    { Label: "FetchAllData", Link: "/FetchApi" },
+    { Label: "FetchDeleteData", Link: "/FetchApi/FetchDeleteData" },
+    { Label: "FetchPostData", Link: "/FetchApi/FetchPostData" },
+    { Label: "FetchById", Link: "/FetchApi/FetchSingle" },
+    { Label: "FetchUpdateData", Link: "/FetchApi/FetchUpdateData" }
   ];
 
   const handleLogout = () => {

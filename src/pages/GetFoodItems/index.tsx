@@ -1,7 +1,7 @@
 import { db } from '@/firebase';
 import { useEffect, useState } from 'react';
 import { collection, doc, getDocs, deleteDoc } from 'firebase/firestore';
-import Header from '@/Components/DemoSubComponents/DemoHeader';
+// import Header from '@/Components/DemoSubComponents/DemoHeader';
 import { useRouter } from 'next/router';
 import { useDetailsContext } from '../../Provider/DataContext';
 
@@ -70,7 +70,7 @@ export default function ProductTable() {
 
   return (
     <>
-      <Header FoodItems={FoodItems} />
+      {/* <Header FoodItems={FoodItems} /> */}
       <table className="min-w-full table-auto border-collapse border border-gray-300">
         <caption className="caption-top text-lg font-semibold py-2">
           A simple table of product inventory

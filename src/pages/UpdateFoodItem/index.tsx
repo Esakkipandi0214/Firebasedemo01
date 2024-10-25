@@ -1,7 +1,7 @@
 import { db } from "@/firebase"
 import { useEffect, useState } from "react"
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore"
-import Header from '@/Components/DemoSubComponents/DemoHeader'
+// import Header from '@/Components/DemoSubComponents/DemoHeader'
 
 
 interface Product {
@@ -74,7 +74,7 @@ export default function ProductTable() {
 
   return (
     <>
-    <Header/>
+    {/* <Header/> */}
       <table className="min-w-full table-auto border-collapse border border-gray-300">
         <caption className="caption-top text-lg font-semibold py-2">A simple table of product inventory</caption>
         <thead className="bg-gray-100">
